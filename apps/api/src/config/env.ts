@@ -16,13 +16,13 @@ const envSchema = z.object({
     .max(65535)
     .default(3000),
 
-  DATABASE_URL: z.string().url(),
+  // DATABASE_URL: z.string().url(),
 
-  REDIS_URL: z.string().url(),
+  // REDIS_URL: z.string().url(),
 
-  JWT_SECRET: z.string().min(1),
+  // JWT_SECRET: z.string().min(1),
 
-  GEMINI_API_KEY: z.string().min(1),
+  // GEMINI_API_KEY: z.string().min(1),
 
   LOG_LEVEL: z
     .enum(["error", "warn", "info", "debug"])
@@ -48,21 +48,21 @@ export const config = {
     port: env.PORT,
   },
 
-  database: {
-    url: env.DATABASE_URL,
-  },
+  // database: {
+  //   url: env.DATABASE_URL,
+  // },
 
-  redis: {
-    url: env.REDIS_URL,
-  },
+  // redis: {
+  //   url: env.REDIS_URL,
+  // },
 
-  auth: {
-    jwtSecret: env.JWT_SECRET,
-  },
+  // auth: {
+  //   jwtSecret: env.JWT_SECRET,
+  // },
 
-  ai: {
-    geminiApiKey: env.GEMINI_API_KEY,
-  },
+  // ai: {
+  //   geminiApiKey: env.GEMINI_API_KEY,
+  // },
 
   logging: {
     level: env.LOG_LEVEL,

@@ -19,4 +19,28 @@ async function start() {
   }
 }
 
-start();
+
+
+let isShuttingDown = false;
+async function shutdown() {
+
+  if(isShuttingDown) return;
+
+  isShuttingDown = true;
+  app.log.info("Server is shutting down...");
+
+  try {
+      await app.close();
+
+      app.log.info("Server shut down successfully");
+  } catch (error) {
+      app.log.error(error, "Error during server shutdown");
+      process.exit(1);
+  }
+}
+
+process.on("SIGTERM", shutdown);
+process.on("SIGINT", shutdown);
+
+
+start(); 

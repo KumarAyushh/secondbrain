@@ -18,7 +18,18 @@ const envSchema = z.object({
 
   // DATABASE_URL: z.string().url(),
 
-  // REDIS_URL: z.string().url(),
+  REDIS_HOST: z.string().min(1).default("localhost"),
+
+  REDIS_PORT: z.coerce
+    .number()
+    .int()
+    .min(1)
+    .max(65535)
+    .default(6379),
+
+  REDIS_USERNAME: z.string().min(1).optional(),
+
+  REDIS_PASSWORD: z.string().min(1),
 
   // JWT_SECRET: z.string().min(1),
 
@@ -52,9 +63,12 @@ export const config = {
   //   url: env.DATABASE_URL,
   // },
 
-  // redis: {
-  //   url: env.REDIS_URL,
-  // },
+  redis: {
+    host: env.REDIS_HOST,
+    port: env.REDIS_PORT,
+    username: env.REDIS_USERNAME,
+    password: env.REDIS_PASSWORD,
+  },
 
   // auth: {
   //   jwtSecret: env.JWT_SECRET,

@@ -1,6 +1,7 @@
 import { buildApp } from "./app.js";
 import { config } from "./config/env.js";
-
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = buildApp();
 
@@ -33,12 +34,12 @@ async function shutdown() {
       await app.close();
 
       app.log.info("Server shut down successfully");
+      process.exit(0);
   } catch (error) {
       app.log.error(error, "Error during server shutdown");
       process.exit(1);
   }
 }
-
 process.on("SIGTERM", shutdown);
 process.on("SIGINT", shutdown);
 

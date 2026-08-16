@@ -2,17 +2,44 @@ services:
   postgres:
     image: postgres:17-alpine
     container_name: secondbrain-postgres
+    restart: always
 
     environment:
-      POSTGRES_USER: secondbrain
-      POSTGRES_PASSWORD: secondbrain_dev
-      POSTGRES_DB: secondbrain
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
 
     ports:
       - "5432:5432"
 
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
+
+    networks:
+      - secondbrain-network
+
+  redis:
+    image: redis/redis-stack:6.2.6-v19
+    container_name: secondbrain-redis
+    restart: always
+
+    environment:
+      REDIS_ARGS: "--requirepass ${REDIS_PASSWORD}"
+
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+
+    volumes:
+      - redis-data:/data
+
+    networks:
+      - secondbrain-network
 
 volumes:
-  postgres_data:
+  postgres-data:
+  redis-data:
+
+networks:
+  secondbrain-network:
+    driver: bridge

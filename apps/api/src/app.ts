@@ -5,6 +5,7 @@ import logger from "./logger/index.js";
 import { registerErrorHandler } from "./errors/index.js";
 import requestIdPlugin from "./plugins/request-id.js";
 import redisPlugin from "./plugins/redis.js";
+import prismaPlugin from "./plugins/prisma.js";
 export function buildApp() {
   const app = Fastify({
     // Use loggerInstance to pass your pre-configured Pino logger basically
@@ -13,6 +14,7 @@ export function buildApp() {
   });
   app.register(requestIdPlugin);
   app.register(redisPlugin);
+  app.register(prismaPlugin);
   registerErrorHandler(app);
 
   app.register(registerRoutes);

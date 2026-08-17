@@ -36,9 +36,28 @@ services:
     networks:
       - secondbrain-network
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: secondbrain-pgadmin
+    restart: always
+
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+
+    ports:
+      - "5050:80"
+
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+    networks:
+      - secondbrain-network
+
 volumes:
   postgres-data:
   redis-data:
+  pgadmin-data:
 
 networks:
   secondbrain-network:

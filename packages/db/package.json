@@ -17,7 +17,9 @@
     "migrate:status": "prisma migrate status"
   },
   "dependencies": {
-    "@prisma/client": "^7.9.1"
+    "@prisma/adapter-pg": "^7.9.1",
+    "@prisma/client": "^7.9.1",
+    "pg": "^8.23.0"
   },
   "devDependencies": {
     "@types/node": "^26.1.2",

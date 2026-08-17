@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "packageManager": "pnpm@10.34.5",
   "scripts": {
+    "dev": "pnpm --filter api dev",
     "db:generate": "pnpm --filter @secondbrain/db generate",
     "db:migrate:dev": "pnpm --filter @secondbrain/db migrate:dev",
     "db:migrate:deploy": "pnpm --filter @secondbrain/db migrate:deploy",
